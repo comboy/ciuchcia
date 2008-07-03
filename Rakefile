@@ -10,6 +10,7 @@ require 'ciuchcia'
 task :default => 'spec:run'
 
 PROJ.name = 'ciuchcia'
+PROJ.version = '0.0.1'
 PROJ.authors = 'Kacper Cieśla'
 PROJ.email = 'kacper.ciesla@gmail.com'
 PROJ.url = 'FIXME (project homepage)'
