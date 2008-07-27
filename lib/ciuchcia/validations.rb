@@ -37,6 +37,20 @@ module Ciuchcia
       true
     end
     
+    def self.valid_pesel?(pesel)
+      # validates presence
+      return false if pesel.nil? or (pesel.empty? rescue true)
+      
+      # clean up and check format (should be 11 digits)
+      pesel.gsub!(/\ |\-|\../,'')
+      return false unless pesel.match(/^\d{11}$/)
+      
+      weights = [1,3,7,9,1,3,7,9,1,3]
+      digits = pesel.split('').map {|i| i.to_i }      
+      return false unless digits[0..-2].inject(digits[-1]) { |sum,x| sum + x*weights.shift } % 10 == 0
+      true
+    end
+    
   end
 end
 
@@ -46,31 +60,32 @@ module ActiveRecord
       
       def validates_nip(*attr_names)
         configuration = { :message => 'Niepoprawny numer NIP', :on => :save }
-        configuration.update(attr_names.extract_options!)
-        
-        attr_accessor(*(attr_names.map { |n| "#{n}_confirmation" }))
+        configuration.update(attr_names.extract_options!)        
         
         validates_each(attr_names, configuration) do |record, attr_name, value|
-          value = record.send("#{attr_name}")          
-          record.errors.add(attr_name, configuration[:message]) unless Ciuchcia::Validations.valid_nip? value       
+          record.errors.add(attr_name, configuration[:message]) unless Ciuchcia::Validations.valid_nip? record.send("#{attr_name}")  
         end          
       end
         
       def validates_regon(*attr_names)
         configuration = { :message => 'Niepoprawny numer REGON', :on => :save }
         configuration.update(attr_names.extract_options!)
-        
-        attr_accessor(*(attr_names.map { |n| "#{n}_confirmation" }))
-        
-        validates_each(attr_names, configuration) do |record, attr_name, value|
-          value = record.send("#{attr_name}")          
-          record.errors.add(attr_name, configuration[:message]) unless Ciuchcia::Validationsvalid_regon? value       
+                
+        validates_each(attr_names, configuration) do |record, attr_name, value|                   
+          record.errors.add(attr_name, configuration[:message]) unless Ciuchcia::Validations.valid_regon? record.send("#{attr_name}")       
         end          
-      end
+      end            
+
+      def validates_pesel(*attr_names)
+        configuration = { :message => 'Niepoprawny numer PESEL', :on => :save }
+        configuration.update(attr_names.extract_options!)
+                
+        validates_each(attr_names, configuration) do |record, attr_name, value|                   
+          record.errors.add(attr_name, configuration[:message]) unless Ciuchcia::Validations.valid_pesel? record.send("#{attr_name}")       
+        end          
+      end            
       
-            
-    end
-    
-    
+      
+    end        
   end
 end

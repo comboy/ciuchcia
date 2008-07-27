@@ -7,14 +7,15 @@
     def number_in_words(n,ending=nil)
       # It's probably the worst code in ruby I've ever written
       # It seems to work, but it definitely should not ;)
-      return '' if n == 0
+      n = n.to_i 
+      return '' if n.nil? or n == 0 
       sc = [''] + %w{jeden dwa trzy cztery pięć sześć siedem osiem dziewięć}
       sn = %w{dziesięć jedenaście dwanaście trzynaście czternaście piętnaście szesnaście siedemnaście osiemnaście dziewiętnaście}
       sd = ['',''] + %w{dwadzieścia trzydzieści czterdzieści pięćdziesiąt sześćdziesiąt siedemdziesiąt osiemdziesiąt dziewiędziesiąt sto}
       ss = [''] + %w{sto dwieście trzysta czterysta pięćset sześćset siedemset osiemset dziewięćset}
-      b = (ending || ['','','']),%w{tysiąc tysiące tysięcy},%w{milion miliony milionów},%w{miliard miliardy miliarðów}     
+      b = (ending || ['','','']),%w{tysiąc tysiące tysięcy},%w{milion miliony milionów},%w{miliard miliardy miliardów},%w{bilion biliony bilionów}     
       p = n.to_s.size 
-      return 'bardzo dużo' if p > 11
+      return n if p > 15
       d,dn = n.to_s[0,(p%3 == 0 ? 3 : p%3)], n.to_s[(p%3 == 0 ? 3 : p%3)..-1]
       return "#{d.to_i==0 ? '' : b[((p-1)/3.0).floor][0]} #{number_in_words(dn,ending)}".strip if (d.to_i == 1 or d.to_i == 0 ) and n != 1
       r = ''

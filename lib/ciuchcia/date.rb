@@ -1,4 +1,4 @@
-if Object.const_defined? 'Date'
+if Object.const_defined? 'Date' and Ciuchcia.const_defined? 'PATCH_DATE'
 
   class CiuchciaDate < Date
     MONTHNAMES = [nil] + %w{Styczeń Luty Marzec Kwiecień Maj Czerwiec Lipiec Sierpień Wrzesień Październik Listopad Grudzień}
