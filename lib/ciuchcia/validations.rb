@@ -85,6 +85,16 @@ module ActiveRecord
         end          
       end            
       
+      def validates_no_profanity
+        configuration = { :on => :save }
+        configuration.update(attr_names.extract_options!)
+                
+        validates_each(attr_names, configuration) do |record, attr_name, value|                   
+          result = Ciuchcia::Profanity.check record.send(attr_name.to_sym)       
+          record.errors.add(attr_name, configuration[:message] ? configuration[:message] : "#{result} jest wulgaryzmem") if result 
+        end                  
+      end
+      
       
     end        
   end
