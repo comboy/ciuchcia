@@ -53,14 +53,19 @@ describe Ciuchcia do
   it "should correctly check profanity for utf-8 words" do
     Ciuchcia::Profanity.check('nie ma co pierdolić').should_not be_false
     Ciuchcia::Profanity.check('przypierdolić pizdą').should_not be_false
+    Ciuchcia::Profanity.check('pierdolić').should_not be_false
   end
 
-  
-  it "should correctly check profanity 2" do
+  it "should correctly check no profanity" do
     Ciuchcia::Profanity.check(' wiele kur warszawa ma').should be_false
     Ciuchcia::Profanity.check('kur.warszawa').should be_false    
   end
   
+  it "should correctly check profanity no with no polish letters" do
+    Ciuchcia::Profanity.check('pierdolic').should_not be_false
+    Ciuchcia::Profanity.check('zapierdolic').should_not be_false    
+    Ciuchcia::Profanity.check('pierdol0ny').should_not be_false    
+  end
   
 end
 
