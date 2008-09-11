@@ -85,7 +85,7 @@ module ActiveRecord
         end          
       end            
       
-      def validates_no_profanity
+      def validates_no_profanity(*attr_names)
         configuration = { :on => :save }
         configuration.update(attr_names.extract_options!)
                 
