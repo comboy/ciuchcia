@@ -17,8 +17,12 @@ module Ciuchcia
       vulgar_words.include? word
     end
     
-    def self.check(text)
-
+    def self.check(text)      
+      # (c) f
+      co_za_sraka = $KCODE
+      
+      $KCODE="NONE"
+      
       nw = '[^A-Za-z0-9]'
       utf_letters = "\352\363\261\266\263\277\274\346\361".split('')
       ascii_letters = "eoaslzzcn".split('')
@@ -37,8 +41,9 @@ module Ciuchcia
         regexp_string = "(#{nw}|^)"+word.split('').map {|l| "#{utf_or_ascii.call l}+"}.join("#{nw}*")+"(#{nw}|$)"
         regexp = Regexp.new regexp_string,'i'
         m = text.match regexp
-        return m[0].strip if m
+        $KCODE = co_za_sraka and return m[0].strip if m
       end
+      $KCODE = co_za_sraka
       false
     end
     
