@@ -13,11 +13,9 @@ PROJ.name = 'ciuchcia'
 PROJ.version = Ciuchcia::VERSION
 PROJ.authors = 'Kacper Cieśla'
 PROJ.email = 'kacper.ciesla@gmail.com'
-PROJ.url = 'FIXME (project homepage)'
+PROJ.url = 'http://community.programuj.com/p/comboy/Ciuchcia'
 PROJ.rubyforge.name = 'ciuchcia'
 
 PROJ.spec.opts << '--color'
-
-depend_on 'rails'
 
 # EOF

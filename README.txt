@@ -6,14 +6,11 @@ ciuchcia
 
 Library for rails apps polonization.
 
-== FEATURES/PROBLEMS:
-    http://ciuchcia.rubyforge.org/
-== SYNOPSIS:
-    http://ciuchcia.rubyforge.org/
-== REQUIREMENTS:
-    http://ciuchcia.rubyforge.org/
+== WHAT IS IT ALL ABOUT
+   http://community.programuj.com/p/comboy/Ciuchcia
+
 == INSTALL:
-    http://ciuchcia.rubyforge.org/
+    gem intall ciuchcia
 
 == LICENSE:
 
