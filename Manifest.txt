@@ -2,11 +2,13 @@ History.txt
 Manifest.txt
 README.txt
 Rakefile
+config/name_days.yml
 config/vulgar_words.yml
 lib/ciuchcia.rb
 lib/ciuchcia/date.rb
 lib/ciuchcia/distance_of_time.rb
 lib/ciuchcia/error_messages_for.rb
+lib/ciuchcia/name_days.rb
 lib/ciuchcia/number_in_words.rb
 lib/ciuchcia/profanity.rb
 lib/ciuchcia/validations.rb
