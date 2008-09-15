@@ -2,6 +2,12 @@
 
 require File.join(File.dirname(__FILE__), %w[spec_helper])
 
+class TestView
+  include ActionView::Helpers::DateHelper
+end
+
+test_view = TestView.new
+
 describe Ciuchcia do
   it "should correctly tralnlate numbers to words" do
     number_in_words(1).should eql("jeden")
@@ -17,6 +23,11 @@ describe Ciuchcia do
     money_in_words(13.45).should eql("trzynaście złotych czterdzieści pięć groszy")
     money_in_words(2.30).should eql("dwa złote trzydzieści groszy")
     money_in_words(2401).should eql("dwa tysiące czterysta jeden złotych")
+  end
+  
+  it "should tell distance in time po kurwa polsku" do
+    test_view.distance_of_time_in_words(Time.now - 60,Time.now).should eql("1 minuta")
+    test_view.distance_of_time_in_words(Time.now - 3600*2,Time.now).should eql("około 2 godziny")
   end
   
   it "should correctly validates NIP number" do
