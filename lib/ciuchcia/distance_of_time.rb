@@ -8,13 +8,7 @@ module ActionView
         distance_in_minutes = (((to_time - from_time).abs)/60).round
         distance_in_seconds = ((to_time - from_time).abs).round
         
-        def polish_ending(n, endings)          
-          case (n % 10)
-          when 1: n > 10 ? endings[2] : endings[0]
-          when 2..4: endings[1]
-          else endings[2]
-          end
-        end
+
 
         case distance_in_minutes
           when 0..1
@@ -28,15 +22,15 @@ module ActionView
               else             '1 minuta'
             end
 
-          when 2..44           then "#{distance_in_minutes} #{polish_ending(distance_in_minutes,['minuta','minuty','minut'])}"
+          when 2..44           then "#{distance_in_minutes} #{Ciuchcia::polish_ending(distance_in_minutes,['minuta','minuty','minut'])}"
           when 45..89          then 'około godzina'
-          when 90..1439        then "około #{(distance_in_minutes.to_f / 60.0).round} #{polish_ending((distance_in_minutes.to_f / 60.0).round,['godzina','godziny','godzin'])}"
+          when 90..1439        then "około #{(distance_in_minutes.to_f / 60.0).round} #{Ciuchcia::polish_ending((distance_in_minutes.to_f / 60.0).round,['godzina','godziny','godzin'])}"
           when 1440..2879      then '1 dzień'
           when 2880..43199     then "#{(distance_in_minutes / 1440).round} dni"
           when 43200..86399    then 'około 1 miesiąc'
-          when 86400..525599   then "#{(distance_in_minutes / 43200).round} #{polish_ending((distance_in_minutes / 43200).round,['miesiąc','miesiące','miesięcy'])}"
+          when 86400..525599   then "#{(distance_in_minutes / 43200).round} #{Ciuchcia::polish_ending((distance_in_minutes / 43200).round,['miesiąc','miesiące','miesięcy'])}"
           when 525600..1051199 then 'około rok'
-          else                      "ponad #{(distance_in_minutes / 525600).round} #{polish_ending((distance_in_minutes / 525600).round,['rok','lata','lat'])}"
+          else                      "ponad #{(distance_in_minutes / 525600).round} #{Ciuchcia::polish_ending((distance_in_minutes / 525600).round,['rok','lata','lat'])}"
         end
       end
       
