@@ -12,6 +12,10 @@ module Ciuchcia
       list[t.month][t.day]
     end
     
+    def self.show
+      today[0..-2].join(', ') + ' oraz ' + today[-1]
+    end
+    
     def self.list_full
       @@name_days = YAML.load_file(File.join(File.expand_path(File.dirname(__FILE__)),'..','..','config','name_days_full.yml' ))
     end    
